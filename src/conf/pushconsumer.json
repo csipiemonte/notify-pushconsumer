@@ -1,0 +1,9 @@
+{
+  "app_name": "pushconsumer",
+  "firebase": {
+    "url": "https://fcm.googleapis.com/fcm/send"
+  },
+  "log4js": {
+    "pm2": true
+  }
+}
