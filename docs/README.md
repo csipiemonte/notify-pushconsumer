@@ -7,13 +7,13 @@
 Per rendere operativo il sistema occorre:
 1. impostare gli opportuni valori delle variabili d'ambiente
 1. editare il file di configurazione
-1. avviare l'applicazione.
+1. avviare l'applicazione
 
 ## Prerequisites
 
 * Istanza attiva di Postgres
 * Componente Preferences attiva per poter leggere le preferenze degli utenti
-* Componente Message broker attiva per tracciare eventi (opzionale)
+* Componente Message broker attiva per leggere i messaggi e tracciare eventi
 * Componente Events attiva per inserire su db gli eventi generati (opzionale)
 
 ## Configuration
@@ -56,7 +56,7 @@ npm start
 ```
 
 # Eventi
-Il sistema registra su un message broker basato su api rest gli eventi relativi all'esecuzione. Vedi il progetto "eventconsumer" per i dettagli sul formato degli eventi.
+Il sistema registra su un message broker basato su api rest gli eventi relativi all'esecuzione. Vedi la componente [notify-events](https://github.com/csipiemonte/notify-events) per i dettagli sul formato degli eventi.
 
 ## Use case
 
