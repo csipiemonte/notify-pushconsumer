@@ -12,36 +12,6 @@ const utility = obj.utility();
 
 var requestPromise = require('request-promise-native');
 
-var hostname = require('os').hostname();
-console.log("instrumentazione per appdynamics: ", process.env.APPDYNAMICS_HOSTS, hostname)
-logger.info("instrumentazione per appdynamics: ", process.env.APPDYNAMICS_HOSTS, hostname)
-
-// definizione dei diversi ambienti di deploy
-
-var env_dynamics = {
-    "dev" : "DEV",
-    "tst" : "TEST",
-    "prod": "PROD"
-}
-
-// configurazione per i differenti ambienti di deploy
-if(process.env.APPDYNAMICS_HOSTS && process.env.APPDYNAMICS_HOSTS.indexOf(hostname) !== -1){
-    require("appdynamics").profile({
-        controllerHostName: 'csi-net.saas.appdynamics.com',
-        controllerPort: 443,
-        controllerSslEnabled: true,
-        accountName: 'csi-net',
-        accountAccessKey: 'accountAccessKey',
-        applicationName: 'NOTIFY_' + env_dynamics[process.env.ENVIRONMENT] + '_CSI-01',
-        tierName: 'notify-' + conf.app_name,
-        nodeName: 'notify-'+ conf.app_name + '-' + hostname,
-        proxyHost: conf.appdynamics.proxyHost,
-        proxyPort: conf.appdynamics.proxyPort
-    })
-
-
-}
-
 // Verifica l'invio di un messaggio
 
 function checkPush(payloadMessage) {
