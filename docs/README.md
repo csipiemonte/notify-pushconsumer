@@ -25,7 +25,7 @@ La configurazione è basata su variabili d'ambiente e file di configurazione. Un
 Le variabili d'ambiente da valorizzare sono:
 * `ENVIRONMENT`: rappresenta l'ambiente di esecuzione (ad esempio dev, tst o prod). Serve per individuare il file di configurazione secondario.
 
-I file di configurazione sono `conf/pushconsumer.json` e`conf/pushconsumer-{ENVIRONMENT}.json`. Ove lo stesso parametro sia presente su entrambi i file il valore in `conf/preferences-{ENVIRONMENT}.json` ha la precedenza.
+I file di configurazione sono `conf/pushconsumer.json` e`conf/pushconsumer-{ENVIRONMENT}.json`. Ove lo stesso parametro sia presente su entrambi i file il valore in `conf/pushconsumer-{ENVIRONMENT}.json` ha la precedenza.
 
 I principali attributi presenti nei file di configurazione sono elencati di seguito (per l'elenco completo visualizzare il contenuto dei file presenti nella cartella src/conf):
 
