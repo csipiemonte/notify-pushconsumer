@@ -2,7 +2,7 @@
   "name": "jobs",
   "version": "1.0.0",
   "description": "consumer of the queue that contains messages to be sent as push notification",
-  "main": "push-consumer.js",
+  "main": "index.js",
   "scripts": {
     "start": "cd src && node pushconsumer.js"
   },

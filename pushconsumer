@@ -1,1 +1,2 @@
-node src/pushconsumer.js >/dev/null 2>&1 &
+#!/bin/bash
+cd src && node pushconsumer.js >/dev/null 2>&1 &
