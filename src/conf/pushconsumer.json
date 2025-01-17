@@ -1,9 +1,11 @@
 {
   "app_name": "pushconsumer",
   "firebase": {
-    "url": "https://fcm.googleapis.com/fcm/send"
+    "legacy_api_url": "https://fcm.googleapis.com/fcm/send",
+    "httpv1_api_url": "https://fcm.googleapis.com/v1/projects/:project_id/messages:send"
   },
   "log4js": {
     "pm2": true
-  }
+  },
+  "defaulttenant": "r_piemon"
 }

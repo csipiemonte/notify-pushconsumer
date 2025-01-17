@@ -2,13 +2,18 @@
   "mb": {
     "queues": {
       "messages": "http://localhost:8080/api/v1/queues/messages:push",
+      "retry": "http://localhost:8080/api/v1/queues/messages:push:to_be_retried",
       "events": "http://localhost:8080/api/v1/topics/events"
     },
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNDNjOGY2NDItNDM3Ni00OTljLThlM2MtZGI3NGRkMjI4Yzg3IiwicHJlZmVyZW5jZV9zZXJ2aWNlX25hbWUiOiJwdXNoY29uc3VtZXIiLCJleHAiOjI1MzQwMjIxMDgwMCwiaWF0IjoxNTE5ODIyNzA0NDM4LCJhcHBsaWNhdGlvbnMiOnsibWIiOlsiZW5xdWV1ZSIsImRlcXVldWUiXSwicHJlZmVyZW5jZXMiOlsicmVhZCIsIndyaXRlIiwiYWRtaW4iXSwibWV4IjpbInJlYWQiLCJ3cml0ZSIsImFkbWluIl19fQ.3TWtyR1TBIsu6gRg0ADOWg0F7fWMcD65FELolrgXxmI"
   },
   "preferences": {
-    "url": "http://localhost:9092/api/v1/users",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNDNjOGY2NDItNDM3Ni00OTljLThlM2MtZGI3NGRkMjI4Yzg3IiwicHJlZmVyZW5jZV9zZXJ2aWNlX25hbWUiOiJwdXNoY29uc3VtZXIiLCJleHAiOjI1MzQwMjIxMDgwMCwiaWF0IjoxNTE5ODIyNzA0NDM4LCJhcHBsaWNhdGlvbnMiOnsibWIiOlsiZW5xdWV1ZSIsImRlcXVldWUiXSwicHJlZmVyZW5jZXMiOlsicmVhZCIsIndyaXRlIiwiYWRtaW4iXSwibWV4IjpbInJlYWQiLCJ3cml0ZSIsImFkbWluIl19fQ.3TWtyR1TBIsu6gRg0ADOWg0F7fWMcD65FELolrgXxmI"
+    "url": "http://localhost:9092/api/v2",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNDNjOGY2NDItNDM3Ni00OTljLThlM2MtZGI3NGRkMjI4Yzg3IiwicHJlZmVyZW5jZV9zZXJ2aWNlX25hbWUiOiJwdXNoY29uc3VtZXIiLCJleHAiOjI1MzQwMjIxMDgwMCwiaWF0IjoxNTE5ODIyNzA0NDM4LCJhcHBsaWNhdGlvbnMiOnsibWIiOlsiZW5xdWV1ZSIsImRlcXVldWUiXSwicHJlZmVyZW5jZXMiOlsicmVhZCIsIndyaXRlIiwiYWRtaW4iXSwibWV4IjpbInJlYWQiLCJ3cml0ZSIsImFkbWluIl19fQ.3TWtyR1TBIsu6gRg0ADOWg0F7fWMcD65FELolrgXxmI",
+    "basicauth": {
+      "username": "admin",
+      "password": "admin"
+    }
   },
   "log4js": {
     "appenders": {

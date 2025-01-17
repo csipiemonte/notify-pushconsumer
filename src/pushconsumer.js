@@ -1,19 +1,16 @@
-console.log(JSON.stringify(process.env, null, 4));
 var commons = require("../../commons/src/commons");
 const conf = commons.merge(require('./conf/pushconsumer'), require('./conf/pushconsumer-' + (process.env.ENVIRONMENT || 'localhost')));
-console.log(JSON.stringify(conf, null, 4));
-
-
 const obj = commons.obj(conf);
 
 const logger = obj.logger();
 const eh = obj.event_handler();
 const utility = obj.utility();
+const legacySender = require("./legacy_api_sender")(conf, logger);
+const httpv1Sender = require("./httpv1_api_sender")(conf, logger);
 
-var requestPromise = require('request-promise-native');
+var httpv1AccessTokensCache = {};
 
-// Verifica l'invio di un messaggio
-
+// verifica del messaggio da inviare
 function checkPush(payloadMessage) {
     var res = [];
 
@@ -38,70 +35,78 @@ function checkPush(payloadMessage) {
     return res;
 }
 
-
 function checkTo(payload) {
     return payload.push.token;
 }
 
-// Effettua l'invio del messaggio
-
+// effettua l'invio del messaggio
 async function sendPush(body, userPreferences) {
+    try {
+        var messagePayload = {
+            id : body.payload.id,
+            bulk_id : body.payload.bulk_id,
+            user_id : body.payload.user_id,
+            tag : body.payload.tag,
+            correlation_id : body.payload.correlation_id,
+            tenant : body.user.tenant ? body.user.tenant : conf.defaulttenant
+        };
 
-    var message_payload = {
-        id : body.payload.id,
-        bulk_id : body.payload.bulk_id,
-        user_id : body.payload.user_id,
-        tag : body.payload.tag,
-        correlation_id : body.payload.correlation_id
-    };
-
-    await eh.info("trying to send push",JSON.stringify({
-        message: message_payload
-    }));
-    logger.debug("trying to send push");
-
-
-    var message = body.payload;
-
-    let arrayDestinations = Object.values(userPreferences.body.push);
-
-    var params = {
-        "registration_ids": arrayDestinations,
-        "notification": {
-            "title": message.push.title,
-            "body": message.push.body,
-            "click_action": message.push.call_to_action
-        }
-    };
-
-    //logger.debug("push: " ,userPreferences.body.push)
-
-    var options = {
-        url: conf.firebase.url,
-        headers: {
-            "Authorization": "key=" + body.user.preferences.push,
-            "Content-Type": "application/json"
-        },
-        method: 'POST',
-        body: params,
-        json: true,
-        timeout: 2000
-    };
-
-    try{
-        await requestPromise(options);
-        logger.debug("push notification successfully sent");
-        await eh.ok("push notification successfully sent",JSON.stringify({
-            sender: body.user.preference_service_name,
-            message:message
+        eh.info("trying to send push",JSON.stringify({
+            message: messagePayload
         }));
-    }catch(err){
+        logger.debug("trying to send push");
+
+        var message = body.payload;
+
+        let arrayDestinations = Object.values(userPreferences.body.push);
+
+        let serviceConf = null;
+        try {
+            serviceConf = JSON.parse(body.user.preferences.push);
+        } catch (error) {
+            serviceConf = body.user.preferences.push;
+        }
+        logger.debug("Service conf:", serviceConf);
+
+        if(typeof serviceConf === "string" ) {
+            // call legacy APIs
+            let firebaseResponse = await legacySender.sendFcmMessage(serviceConf, message.push, arrayDestinations);
+            logger.debug("Firebase response: status [%s], data [%s]", firebaseResponse.status, JSON.stringify(firebaseResponse.data, null, 2));
+        } else {
+            // call http v1 APIs
+            let tokens = null;
+            if(httpv1AccessTokensCache[body.user.preference_service_name] && 
+                !isAccessTokenExpired(httpv1AccessTokensCache[body.user.preference_service_name].expiry_date)) {
+                 tokens = httpv1AccessTokensCache[body.user.preference_service_name];
+                 logger.debug("Got access token from cache");
+            } else {
+                tokens = await httpv1Sender.getAccessToken(serviceConf);    
+                httpv1AccessTokensCache[body.user.preference_service_name] = tokens;
+            }
+            logger.debug("FCM access tokens:", tokens);
+            logger.debug(new Date(tokens.expiry_date).toISOString());
+            let firebaseResponse = await httpv1Sender.sendFcmMessage(serviceConf.project_id, tokens.access_token, message.push, arrayDestinations);
+            logger.debug("Firebase response: status [%s], data [%s]", firebaseResponse.status, JSON.stringify(firebaseResponse.data, null, 2));
+        }
+    
+        eh.ok("push notification successfully sent", JSON.stringify({
+            sender: body.user.preference_service_name,
+            message: messagePayload
+        }));
+        logger.debug("push notification successfully sent");
+    } catch(err) {
         err.description_message = "firebase error";
+        err.client_source = "pushconsumer";
         throw err;
     }
-
 }
 
-logger.debug(JSON.stringify(process.env, null, 4));
-logger.debug(JSON.stringify(conf, null, 4));
+function isAccessTokenExpired(time) {
+    let now = new Date().getTime();
+    logger.debug("now [%s] expiry_date [%s]", now, time);
+    return (time <= now);
+}
+
+logger.info("environment:", JSON.stringify(process.env, null, 4));
+logger.info("configuration:", JSON.stringify(conf, null, 4));
 obj.consumer("push", checkPush, checkTo, sendPush)();
