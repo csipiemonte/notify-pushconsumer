@@ -5,11 +5,11 @@
       "retry": "http://localhost:8080/api/v1/queues/messages:push:to_be_retried",
       "events": "http://localhost:8080/api/v1/topics/events"
     },
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNDNjOGY2NDItNDM3Ni00OTljLThlM2MtZGI3NGRkMjI4Yzg3IiwicHJlZmVyZW5jZV9zZXJ2aWNlX25hbWUiOiJwdXNoY29uc3VtZXIiLCJleHAiOjI1MzQwMjIxMDgwMCwiaWF0IjoxNTE5ODIyNzA0NDM4LCJhcHBsaWNhdGlvbnMiOnsibWIiOlsiZW5xdWV1ZSIsImRlcXVldWUiXSwicHJlZmVyZW5jZXMiOlsicmVhZCIsIndyaXRlIiwiYWRtaW4iXSwibWV4IjpbInJlYWQiLCJ3cml0ZSIsImFkbWluIl19fQ.3TWtyR1TBIsu6gRg0ADOWg0F7fWMcD65FELolrgXxmI"
+    "token": "YF6E7N5muTBWYRkQaLjSIBgQFtCxKObkWnbW0xVd2EW1U9+pKiUi5zyM6lrrKpOFwrOek6Duzbhz2+rAqxdogFHXTkyUqBIhHcQKyBfH6r2szWvPWwdmolx2YvZAXDC0eYAspQ7CSHCRhRM7uepU48u3y7XlA6mUKyx1IUMhYNT11xSvDm1NkpEeiP3Bvw/FZWCiRWXS9XTszYvQ1dUhilHd+QWr5AAZ93WyACWIZDU+fD+NIxx+1pewoG86PBl1HZqVdNrwp/vcwTI3u1HmA7Kmlsf92LGkT1ttLq2IMECBxbmXJcRmVE1dy1HyRhm1Kl4fILGAZhDSkKLJl3p76grSBL+Z513h8sfj2FKXhUHZkzvywoc/mc3dhStn5rXwc/832ZXigbzk66mzdyUl575jeAs/ez/yCJ1/mzTu4lkdvdZ0JHIEJ4bAx5mJjGoMXx7n/BKPj2tELbYS+B5SgV1lQ12DJ96StphOi7qlFW6sGGKroEye8FhlCkhhk+Dybp1yrNaR6Bb5FhI6/rXAAw=="
   },
   "preferences": {
     "url": "http://localhost:9092/api/v2",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNDNjOGY2NDItNDM3Ni00OTljLThlM2MtZGI3NGRkMjI4Yzg3IiwicHJlZmVyZW5jZV9zZXJ2aWNlX25hbWUiOiJwdXNoY29uc3VtZXIiLCJleHAiOjI1MzQwMjIxMDgwMCwiaWF0IjoxNTE5ODIyNzA0NDM4LCJhcHBsaWNhdGlvbnMiOnsibWIiOlsiZW5xdWV1ZSIsImRlcXVldWUiXSwicHJlZmVyZW5jZXMiOlsicmVhZCIsIndyaXRlIiwiYWRtaW4iXSwibWV4IjpbInJlYWQiLCJ3cml0ZSIsImFkbWluIl19fQ.3TWtyR1TBIsu6gRg0ADOWg0F7fWMcD65FELolrgXxmI",
+    "token": "YF6E7N5muTBWYRkQaLjSIBgQFtCxKObkWnbW0xVd2EW1U9+pKiUi5zyM6lrrKpOFwrOek6Duzbhz2+rAqxdogFHXTkyUqBIhHcQKyBfH6r2szWvPWwdmolx2YvZAXDC0eYAspQ7CSHCRhRM7uepU48u3y7XlA6mUKyx1IUMhYNT11xSvDm1NkpEeiP3Bvw/FZWCiRWXS9XTszYvQ1dUhilHd+QWr5AAZ93WyACWIZDU+fD+NIxx+1pewoG86PBl1HZqVdNrwp/vcwTI3u1HmA7Kmlsf92LGkT1ttLq2IMECBxbmXJcRmVE1dy1HyRhm1Kl4fILGAZhDSkKLJl3p76grSBL+Z513h8sfj2FKXhUHZkzvywoc/mc3dhStn5rXwc/832ZXigbzk66mzdyUl575jeAs/ez/yCJ1/mzTu4lkdvdZ0JHIEJ4bAx5mJjGoMXx7n/BKPj2tELbYS+B5SgV1lQ12DJ96StphOi7qlFW6sGGKroEye8FhlCkhhk+Dybp1yrNaR6Bb5FhI6/rXAAw==",
     "basicauth": {
       "username": "admin",
       "password": "admin"
